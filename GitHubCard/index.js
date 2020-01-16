@@ -2,7 +2,6 @@
            (replacing the palceholder with your Github name):
            https://api.github.com/users/<your name>
 */
-//  axios.get('https://api.github.com/users/Reikiryo')
 
 /* Step 2: Inspect and study the data coming back, this is YOUR 
    github info! You will need to understand the structure of this 
@@ -10,9 +9,6 @@
 
    Skip to Step 3.
 */
-// .then(res => {
-//   console.log(res)
-// })
 
 /* Step 4: Pass the data received from Github into your function, 
            create a new component and add it to the DOM as a child of .cards
@@ -97,20 +93,13 @@ function newCard(obj) {
   return card
 }
 
- const cards = document.querySelector('.cards')
+//where cards append to
+const cards = document.querySelector('.cards')
 
-// axios.get('https://api.github.com/users/Reikiryo')
-// .then(res => {
-//     cards.append(newCard(res.data))
-// })
-
+//all names in this array will have a card made of their github
 const followersArray = ['Reikiryo', 'tetondan', 'dustinmyers', 'justsml', 'luishrd', 'bigknell'];
 
-axios.get('https://api.github.com/users/Reikiryo')
-.then(res => {
-  cards.append(newCard(res.data))
-})
-
+//getting all my followers and creating a card for each + account already in followers array
 axios.get('https://api.github.com/users/Reikiryo/followers')
 .then(res => {
   res.data.forEach(data => {

@@ -2,7 +2,7 @@
            (replacing the palceholder with your Github name):
            https://api.github.com/users/<your name>
 */
-//axios.get('https://api.github.com/users/Reikiryo')
+//  axios.get('https://api.github.com/users/Reikiryo')
 
 /* Step 2: Inspect and study the data coming back, this is YOUR 
    github info! You will need to understand the structure of this 
@@ -27,8 +27,6 @@
           Using that array, iterate over it, requesting data for each user, creating a new card for each
           user, and adding that card to the DOM.
 */
-
-const followersArray = [];
 
 /* Step 3: Create a function that accepts a single object as its only argument,
           Using DOM methods and properties, create a component that will return the following DOM element:
@@ -86,17 +84,46 @@ function newCard(obj) {
         name.classList.add('name')
         username.classList.add('username')
 
+        //img src
+        cardImg.src = obj.avatar_url
+        //text content 
+        name.textContent = obj.name
+        username.textContent = obj.login
+        location.textContent = obj.location
+        link.textContent = obj.html_url
+        followers.textContent = `Followers: ${obj.followers}`
+        bio.textContent = obj.bio
         
-
-
   return card
 }
 
-console.log(newCard(newObj))
-/* List of LS Instructors Github username's: 
-  tetondan
-  dustinmyers
-  justsml
-  luishrd
-  bigknell
-*/
+ const cards = document.querySelector('.cards')
+
+// axios.get('https://api.github.com/users/Reikiryo')
+// .then(res => {
+//     cards.append(newCard(res.data))
+// })
+
+const followersArray = ['Reikiryo', 'tetondan', 'dustinmyers', 'justsml', 'luishrd', 'bigknell'];
+
+axios.get('https://api.github.com/users/Reikiryo')
+.then(res => {
+  cards.append(newCard(res.data))
+})
+
+axios.get('https://api.github.com/users/Reikiryo/followers')
+.then(res => {
+  res.data.forEach(data => {
+    followersArray.push(data.login)
+  })
+  for (let i = 0;i < followersArray.length; i++){
+    const current = followersArray[i]
+    axios.get(`https://api.github.com/users/${current}`)
+    .then(data => {
+      cards.append(newCard(data.data))
+    })
+  }
+})
+
+
+

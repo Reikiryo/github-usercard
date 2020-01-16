@@ -2,6 +2,7 @@
            (replacing the palceholder with your Github name):
            https://api.github.com/users/<your name>
 */
+//axios.get('https://api.github.com/users/Reikiryo')
 
 /* Step 2: Inspect and study the data coming back, this is YOUR 
    github info! You will need to understand the structure of this 
@@ -9,6 +10,9 @@
 
    Skip to Step 3.
 */
+// .then(res => {
+//   console.log(res)
+// })
 
 /* Step 4: Pass the data received from Github into your function, 
            create a new component and add it to the DOM as a child of .cards
@@ -36,7 +40,7 @@ const followersArray = [];
     <p class="username">{users user name}</p>
     <p>Location: {users location}</p>
     <p>Profile:  
-      <a href={address to users github page}>{address to users github page}</a>
+      <a href={address to users github page}</a>
     </p>
     <p>Followers: {users followers count}</p>
     <p>Following: {users following count}</p>
@@ -46,6 +50,49 @@ const followersArray = [];
 
 */
 
+const newObj = {}
+
+function newCard(obj) {
+  const card = document.createElement('div'),
+        //append to card
+        cardImg = document.createElement('img'),
+        info = document.createElement('div'),
+        //append to info
+        name = document.createElement('h3'),
+        username = document.createElement('p'),
+        location = document.createElement('p'),
+        profile = document.createElement('p'),
+        followers = document.createElement('p'),
+        bio = document.createElement('p'),
+        //append to profile
+        link = document.createElement('a')
+
+        //append card
+        card.append(cardImg)
+        card.append(info)
+        //append info
+        info.append(name)
+        info.append(username)
+        info.append(location)
+        info.append(profile)
+        info.append(followers)
+        info.append(bio)
+        //append profile
+        profile.append(link)
+
+        //classes
+        card.classList.add('card')
+        info.classList.add('card-info')
+        name.classList.add('name')
+        username.classList.add('username')
+
+        
+
+
+  return card
+}
+
+console.log(newCard(newObj))
 /* List of LS Instructors Github username's: 
   tetondan
   dustinmyers
